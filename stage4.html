@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude 31-40</title>
+    <style>
+        body {
+            background-color: #d5d5d5;
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 700px;
+            margin: 2em auto;
+            padding: 2em;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1em;
+        }
+
+        .choice {
+            font-size: 1em;
+            display: block;
+            margin: 5px 0;
+            padding: 0.7em 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+
+        .choice:hover {
+            background-color: #2980b9;
+        }
+
+        .choice.correct {
+            background-color: #2ecc71 !important;
+        }
+
+        .choice.incorrect {
+            background-color: #e74c3c !important;
+        }
+
+        #feedback {
+            margin-top: 1em;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .summary {
+            margin-top: 2em;
+        }
+
+        .summary h2 {
+            margin-bottom: 1em;
+        }
+
+        .summary-item {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item.correct-answer {
+            background-color: #e8f5e9;
+            border-left: 5px solid #2ecc71;
+        }
+
+        .summary-item.incorrect-answer {
+            background-color: #ffebee;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .summary-item p {
+            margin: 0.5em 0;
+        }
+
+        .correct-text {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .incorrect-text {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1> STAGE 4</h1>
+        
+        <div class="question">
+            <p id="question-text">Question 11: What is the probability of flipping a coin and getting heads?            </p>
+            <div class="choices">
+                <button class="choice" onclick="checkAnswer(0)">1/2</button>
+                <button class="choice" onclick="checkAnswer(1)">1</button>
+                <button class="choice" onclick="checkAnswer(2)">2/2</button>
+                <button class="choice" onclick="checkAnswer(3)">0</button>
+            </div>
+            <p id="feedback"></p>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "There are 5 women and 3 men applicants for a job.Only two out of eight are selected for a job.The probability that at least one of the selected person will be a women is:  ", 
+            choices: ["A) 14/28", "B) 20/25", "C) 25/28", "D) 27/28"], 
+            correct: 2 },
+            { question: "A box contains 40 bulbs out of which 4 are defective.Two bulbs are selected at random from the box. What will be the probability that both bulbs found to be defective?  ", 
+            choices: ["A) 1/130", "B) 1/40", "C) 25/100", "D) 50/100"],
+             correct: 0 },
+            { question: " Ten persons are seated round a circular table. What is the probability that three friends always sit together?  ", 
+            choices: ["A) 9!", "B) 7!", "C) 3!", "D) 1!"],
+             correct: 1 },
+            { question: "If P(A)=2/3, P(B)=1/4, P(A ∩ B)=1/3 then find the P(A ∪ B) ",
+             choices: ["A)  P(A ∪ B)= P(A) + P(B) ", "B)  P(A ∪ B)= P(A) + P(B) – P(A ∩ B) ", "C)  P(A ∪ B)= P(A) - P(B) – P(A ∩ B) ", "D) None of these"], 
+             correct: 1},
+            { question: "If two dice are thrown simultaneously, then find the probability that the sum of numbers appeared on the dice is 6 or 7?",
+             choices: ["A) 5/6", "D) 7/36", "C) 5/36", "D) 11/36"], 
+             correct: 3 },
+            { question: "Out of 17 applicants, there are 8 boys and 9 girls. Two persons are to be selected for the job. Find the probability that at least one of the selected persons will be a girl. ", 
+            choices: ["A) 25/34", "B) 19/34", "C) 21/34", "D) 27/34"],
+             correct: 3 },
+            { question: "The probability that Alex will solve a problem is 1/5. What is the probability that he solves at least one problem out of 4 problems?", 
+            choices: ["A) 125/350", "B)369/625", "C) 350/600", "D) None of these"], 
+            correct: 2 },
+            { question: "Two dice are thrown together. What is the probability that the sum of the number on the two faces is divisible by 4?",
+             choices: ["A) 1/4", "B) 2/9", "C) 1/9", "D) 1/3"], 
+             correct: 0 },
+            { question: "In a race, the odds in favour of cars P, Q, R, S are 1 : 3, 1 : 4, 1 : 5 and 1 : 6 respectively. Find the probability that one of them wins the race",
+             choices: ["A) 9/17", "B) 114/121", "C) 319/420", "D) 27/111"],
+              correct: 2 },
+              { question: "A fair coin is tossed repeatedly. If head appears on the first four tosses, then the probability of appearance of tail on the fifth toss is.",
+             choices: ["A) 1/3", "B) 3/7", "C) 2/3", "D) 1/2"],
+              correct: 3 },
+        ];
+
+        let currentQuestion = 0;
+        let correctAnswers = 0;
+        const userSelections = [];
+
+        function showQuestion() {
+            const questionText = document.getElementById("question-text");
+            questionText.innerHTML = `<strong>Question ${currentQuestion + 31}</strong>: ${questions[currentQuestion].question}`;
+
+            const choices = document.querySelectorAll(".choice");
+            choices.forEach((choice, index) => {
+                choice.textContent = questions[currentQuestion].choices[index];
+                choice.classList.remove("correct", "incorrect");
+                choice.disabled = false; 
+            });
+
+            const feedback = document.getElementById("feedback");
+            feedback.textContent = "";
+        }
+
+        function checkAnswer(selected) {
+            const choices = document.querySelectorAll(".choice");
+            const feedback = document.getElementById("feedback");
+            const correctIndex = questions[currentQuestion].correct;
+
+            userSelections.push({
+                question: questions[currentQuestion].question,
+                selected: selected,
+                correct: correctIndex
+            });
+
+            
+            choices.forEach((choice, index) => {
+                choice.disabled = true;
+                if (index === correctIndex) {
+                    choice.classList.add("correct"); 
+                }
+            });
+
+            if (selected === correctIndex) {
+                feedback.textContent = "Correct!";
+                correctAnswers++;
+            } else {
+                feedback.textContent = "Incorrect!";
+                choices[selected].classList.add("incorrect");
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showSummary();
+                }
+            }, 200); 
+        }
+        
+        function showSummary() {
+            const quizContainer = document.querySelector(".quiz-container");
+            quizContainer.innerHTML = `<h2>Stage 4 Result</h2><div class="summary"></div>`;
+
+            const summaryContainer = document.querySelector(".summary");
+
+            userSelections.forEach((selection, index) => {
+                const questionObj = questions[index];
+                const isCorrect = selection.selected === selection.correct;
+
+                const summaryItem = document.createElement("div");
+                summaryItem.classList.add("summary-item");
+                summaryItem.classList.add(isCorrect ? "correct-answer" : "incorrect-answer");
+
+                summaryItem.innerHTML = `
+                    <p><strong>Question ${index + 31}:</strong> ${selection.question}</p>
+                    <p><strong>Your Answer:</strong> <span class="${isCorrect ? 'correct-text' : 'incorrect-text'}">
+                        ${questionObj.choices[selection.selected]}
+                    </span></p>
+                    ${!isCorrect ? `<p><strong>Correct Answer:</strong> <span class="correct-text">${questionObj.choices[selection.correct]}</span></p>` : ''}
+                `;
+
+                summaryContainer.appendChild(summaryItem);
+            });
+
+        
+            const totalCorrect = document.createElement("p");
+            totalCorrect.innerHTML = `<strong>You got ${correctAnswers} out of ${questions.length} questions correct.</strong>`;
+            totalCorrect.style.fontSize = "1.2em";
+            totalCorrect.style.marginTop = "1.5em";
+            summaryContainer.appendChild(totalCorrect);
+        }
+
+        
+        showQuestion();
+    </script>
+</body>
+</html>
